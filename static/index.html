@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathoAI // Diagnostic Intelligence Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <!-- Main Header -->
+        <header class="main-header">
+            <div class="brand">
+                <i class="fa-solid fa-microscope logo-icon"></i>
+                <div class="brand-text">
+                    <h1>PathoAI</h1>
+                    <span>DIAGNOSTIC & RISK INTELLIGENCE</span>
+                </div>
+            </div>
+            
+            <div class="header-controls">
+                <div class="control-group">
+                    <label for="disease-select">Target Disease:</label>
+                    <select id="disease-select" class="custom-select">
+                        <option value="heart" selected>Heart Disease</option>
+                        <option value="diabetes">Diabetes Mellitus</option>
+                        <option value="breast_cancer">Breast Cancer (Malignancy)</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label for="algorithm-select">Predictive Model:</label>
+                    <select id="algorithm-select" class="custom-select">
+                        <option value="random_forest" selected>Random Forest</option>
+                        <option value="gradient_boosting">Gradient Boosting</option>
+                        <option value="svm">Support Vector Machine (SVM)</option>
+                        <option value="logistic_regression">Logistic Regression</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-grid">
+            
+            <!-- Upper Section: Form Inputs and Diagnostic Gauge -->
+            <section class="estimator-row">
+                
+                <!-- Patient Feature Sliders Card -->
+                <div class="card glass-panel form-card">
+                    <div class="card-header">
+                        <h2>Patient Physiological Profile</h2>
+                        <p class="subtitle">Adjust values below to estimate patient risk criteria dynamically.</p>
+                    </div>
+                    <form id="estimator-form">
+                        <!-- Javascript will dynamically inject the specific range sliders here -->
+                        <div id="dynamic-form-grid" class="form-grid">
+                            <!-- Sliders go here -->
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Diagnostic Assessment Report Card -->
+                <div class="card glass-panel outcome-card">
+                    <div class="card-header">
+                        <h2>Diagnostic Assessment</h2>
+                    </div>
+                    <div class="outcome-body">
+                        <!-- Score Gauge Circle -->
+                        <div class="score-container">
+                            <svg class="progress-ring" width="200" height="200">
+                                <circle class="progress-ring-bg" stroke="#0e1b2e" stroke-width="14" fill="transparent" r="82" cx="100" cy="100"/>
+                                <circle class="progress-ring-fill" stroke="var(--primary-color)" stroke-width="14" stroke-linecap="round" fill="transparent" r="82" cx="100" cy="100"/>
+                            </svg>
+                            <div class="score-text">
+                                <h3 id="result-probability">---</h3>
+                                <p>RISK PROBABILITY</p>
+                                <span id="result-severity-badge" class="severity-badge">N/A</span>
+                            </div>
+                        </div>
+
+                        <!-- Decision Values -->
+                        <div class="decision-box">
+                            <div class="decision-metric">
+                                <span>Diagnostic Result</span>
+                                <strong id="result-diagnostic">Awaiting Inputs</strong>
+                            </div>
+                            <div class="decision-metric">
+                                <span>Severity Category</span>
+                                <strong id="result-severity-text">Awaiting Inputs</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </section>
+
+            <!-- Bottom Section: Analytics Charts -->
+            <section class="charts-row">
+                <!-- Bar Chart: Model Metrics Comparison -->
+                <div class="card glass-panel metrics-card">
+                    <div class="card-header">
+                        <h2>Model Performance Comparison</h2>
+                        <span class="tag">Cross-Validation</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-metrics"></canvas>
+                    </div>
+                </div>
+
+                <!-- Scatter Chart: ROC Curves -->
+                <div class="card glass-panel roc-card">
+                    <div class="card-header">
+                        <h2>Sensitivity Curves (ROC)</h2>
+                        <span class="tag">True Positive vs False Positive</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart-roc"></canvas>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <div id="toast-container"></div>
+    </div>
+    
+    <script src="/static/app.js"></script>
+</body>
+</html>
